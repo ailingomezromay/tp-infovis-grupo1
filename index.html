@@ -333,9 +333,13 @@ p strong { font-weight: 500; color: var(--ink); }
 .flat { color: var(--ink-muted); }
 
 /* VIZ */
-.viz { border: 1px solid var(--rule); margin: 24px 0; background: var(--surface); }
+.viz-wrap {
+  grid-column: 1 / -1;
+  margin: 8px 0 32px;
+}
+.viz { border: 1px solid var(--rule); background: var(--surface); }
 .viz-top {
-  padding: 12px 16px;
+  padding: 12px 20px;
   border-bottom: 1px solid var(--rule);
   display: flex;
   justify-content: space-between;
@@ -343,7 +347,7 @@ p strong { font-weight: 500; color: var(--ink); }
   gap: 12px;
   background: var(--forest-lt);
 }
-.viz-title { font-size: 12px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+.viz-title { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4; }
 .viz-sub   { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
 .viz-badge {
   font-size: 9px;
@@ -358,10 +362,10 @@ p strong { font-weight: 500; color: var(--ink); }
   background: var(--surface);
 }
 .viz-body { background: #fff; }
-.viz-body iframe { width: 100%; border: none; display: block; height: 520px; }
-.viz-body.tall iframe { height: 700px; }
+.viz-body iframe { width: 100%; border: none; display: block; height: 560px; }
+.viz-body.tall iframe { height: 740px; }
 .viz-foot {
-  padding: 8px 16px;
+  padding: 8px 20px;
   border-top: 1px solid var(--rule);
   font-size: 10px;
   color: var(--ink-muted);
@@ -607,6 +611,18 @@ footer {
           <tr><td class="td-name">Nigeria</td><td>0.7</td><td>0.6</td><td class="down">↓ baja</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">Para leer el gráfico</div>
+        <p>Hacé <strong>click en una línea</strong> para resaltar ese país. Hacé click en la <strong>leyenda</strong> para resaltar una región. Usá el <strong>scroll</strong> para hacer zoom y <strong>arrastrá</strong> para mover.</p>
+      </div>
+      <div class="aside-box sky">
+        <div class="aside-tag">Dos momentos clave</div>
+        <p><strong>2009</strong> — Crisis financiera global. Caída brusca en todos los países desarrollados.<br><br><strong>2020</strong> — Pandemia de COVID-19. Mayor caída de emisiones en décadas. El rebote en 2021–2022 fue casi inmediato.</p>
+      </div>
+    </div>
+    <div class="viz-wrap">
       <div class="viz">
         <div class="viz-top">
           <div>
@@ -625,16 +641,6 @@ footer {
         <div class="pullquote-src">Análisis propio · World Bank Data360</div>
       </div>
     </div>
-    <div class="section-aside">
-      <div class="aside-box">
-        <div class="aside-tag">Para leer el gráfico</div>
-        <p>Hacé <strong>click en una línea</strong> para resaltar ese país. Hacé click en la <strong>leyenda</strong> para resaltar una región. Usá el <strong>scroll</strong> para hacer zoom y <strong>arrastrá</strong> para mover.</p>
-      </div>
-      <div class="aside-box sky">
-        <div class="aside-tag">Dos momentos clave</div>
-        <p><strong>2009</strong> — Crisis financiera global. Caída brusca en todos los países desarrollados.<br><br><strong>2020</strong> — Pandemia de COVID-19. Mayor caída de emisiones en décadas. El rebote en 2021–2022 fue casi inmediato.</p>
-      </div>
-    </div>
   </div>
 
   <!-- VIZ 2 -->
@@ -647,6 +653,18 @@ footer {
       <h2>¿Crecer sin <em>contaminar más?</em></h2>
       <p>Si la Agenda 2030 funciona, los países deberían moverse hacia la derecha en el eje del PBI sin subir en el eje del CO₂. El slider permite ver cómo se desplazan año a año. Lo que emerge es una historia compleja: algunos lograron el desacople, otros no.</p>
       <p>Las economías emergentes siguen atrapadas en una trayectoria donde crecer significa emitir más — no por falta de voluntad, sino de acceso a tecnología limpia y financiamiento climático.</p>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">¿Qué buscar?</div>
+        <p>Un país que se mueve <strong>hacia la derecha sin subir</strong> verticalmente logró el desacople.<br><br><strong>Alemania:</strong> PBI sube, CO₂ baja.<br><strong>China:</strong> ambos suben.<br><strong>India:</strong> ambos suben desde niveles bajos.</p>
+      </div>
+      <div class="aside-box earth">
+        <div class="aside-tag">El tamaño importa</div>
+        <p>El tamaño de cada burbuja representa la <strong>intensidad de carbono</strong>: cuánto CO₂ genera ese país por cada dólar de PBI. Una burbuja grande y alta es el peor escenario posible.</p>
+      </div>
+    </div>
+    <div class="viz-wrap">
       <div class="viz">
         <div class="viz-top">
           <div>
@@ -661,16 +679,6 @@ footer {
         <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_NY_GDP_PCAP_CD y WB_WDI_EN_GHG_CO2_PC_CE_AR5</div>
       </div>
     </div>
-    <div class="section-aside">
-      <div class="aside-box">
-        <div class="aside-tag">¿Qué buscar?</div>
-        <p>Un país que se mueve <strong>hacia la derecha sin subir</strong> verticalmente logró el desacople.<br><br><strong>Alemania:</strong> PBI sube, CO₂ baja.<br><strong>China:</strong> ambos suben.<br><strong>India:</strong> ambos suben desde niveles bajos.</p>
-      </div>
-      <div class="aside-box earth">
-        <div class="aside-tag">El tamaño importa</div>
-        <p>El tamaño de cada burbuja representa la <strong>intensidad de carbono</strong>: cuánto CO₂ genera ese país por cada dólar de PBI. Una burbuja grande y alta es el peor escenario posible.</p>
-      </div>
-    </div>
   </div>
 
   <!-- VIZ 3 -->
@@ -682,19 +690,6 @@ footer {
       </div>
       <h2>El indicador que <em>nadie mira</em> pero importa</h2>
       <p>La intensidad de carbono mide cuántas toneladas de CO₂ se emiten por cada unidad de PBI. Es el indicador más honesto de eficiencia climática. El hallazgo más llamativo: <strong>China redujo su intensidad a la mitad</strong> en 22 años — aunque sus emisiones totales casi se triplicaron, porque su economía creció aún más rápido.</p>
-      <div class="viz">
-        <div class="viz-top">
-          <div>
-            <div class="viz-title">Intensidad de carbono por país y año (2000–2022)</div>
-            <div class="viz-sub">Color más intenso = más CO₂ por unidad de PBI · Barras = promedio histórico · Hover para valores</div>
-          </div>
-          <span class="viz-badge">Altair · Colab</span>
-        </div>
-        <div class="viz-body">
-          <iframe src="./viz4_heatmap.html" loading="lazy"></iframe>
-        </div>
-        <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_EN_GHG_CO2_RT_GDP_KD · 2000–2022</div>
-      </div>
     </div>
     <div class="section-aside">
       <div class="aside-box">
@@ -708,6 +703,21 @@ footer {
       <div class="aside-box sky">
         <div class="aside-tag">El caso Brasil</div>
         <p>Brasil tiene la intensidad más baja no por política industrial, sino por <strong>geografía energética</strong>: su matriz es mayoritariamente hidroeléctrica. No es un modelo fácilmente replicable.</p>
+      </div>
+    </div>
+    <div class="viz-wrap">
+      <div class="viz">
+        <div class="viz-top">
+          <div>
+            <div class="viz-title">Intensidad de carbono por país y año (2000–2022)</div>
+            <div class="viz-sub">Color más intenso = más CO₂ por unidad de PBI · Barras = promedio histórico · Hover para valores</div>
+          </div>
+          <span class="viz-badge">Altair · Colab</span>
+        </div>
+        <div class="viz-body">
+          <iframe src="./viz4_heatmap.html" loading="lazy"></iframe>
+        </div>
+        <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_EN_GHG_CO2_RT_GDP_KD · 2000–2022</div>
       </div>
     </div>
   </div>
