@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Estamos a tiempo? — Emisiones y Agenda 2030</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg:         #f4f7f4;
+  --surface:    #ffffff;
+  --ink:        #1a2018;
+  --ink-soft:   #445040;
+  --ink-muted:  #7a8c78;
+  --rule:       #d8e4d6;
+  --forest:     #2c5f3a;
+  --forest-mid: #4a8c5c;
+  --forest-lt:  #e4efe6;
+  --earth:      #6b4c2a;
+  --earth-lt:   #f2ead8;
+  --sky:        #2a4a6b;
+  --sky-lt:     #dce8f2;
+  --col-max:    1100px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 2px solid var(--forest);
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-brand {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+.header-nav { display: flex; gap: 24px; list-style: none; }
+.header-nav a {
+  font-size: 11px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  letter-spacing: .05em;
+  transition: color .2s;
+}
+.header-nav a:hover { color: var(--forest); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+}
+.hero-inner {
+  max-width: var(--col-max);
+  margin: 0 auto;
+  padding: 72px 48px 56px;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 64px;
+  align-items: start;
+}
+.hero-kicker {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-kicker::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--forest);
+  display: inline-block;
+}
+h1 {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(38px, 5.5vw, 64px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+h1 em { font-style: italic; color: var(--forest); }
+.hero-lead {
+  font-family: 'Crimson Pro', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--ink-soft);
+  max-width: 500px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  padding-left: 16px;
+  border-left: 2px solid var(--forest-lt);
+}
+.hero-byline {
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+.byline-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+.byline-authors {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.byline-course {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 6px;
+}
+
+/* STATS — vertical a la derecha del hero */
+.hero-stats {
+  border-left: 1px solid var(--rule);
+  padding-left: 32px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.stat-row {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-n {
+  font-family: 'Crimson Pro', serif;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.stat-n.green { color: var(--forest); }
+.stat-n.muted { color: var(--ink-muted); font-size: 32px; }
+.stat-d {
+  font-size: 11px;
+  color: var(--ink-muted);
+  line-height: 1.45;
+  letter-spacing: .02em;
+}
+
+/* ── PAGE LAYOUT ── */
+.page {
+  max-width: var(--col-max);
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── SECTION WRAPPER (article + sidebar) ── */
+.section-wrap {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 56px;
+  padding-top: 64px;
+  border-top: 1px solid var(--rule);
+  margin-top: 64px;
+}
+.section-wrap:first-child { border-top: none; }
+
+.section-main {}
+.section-aside {
+  padding-top: 6px;
+}
+
+/* SECTION LABEL */
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.sec-tag {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  white-space: nowrap;
+}
+.sec-line { flex: 1; height: 1px; background: var(--rule); }
+
+h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+h2 em { font-style: italic; color: var(--forest); }
+
+p {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+p:last-child { margin-bottom: 0; }
+p strong { font-weight: 500; color: var(--ink); }
+
+.dropcap::first-letter {
+  font-family: 'Crimson Pro', serif;
+  font-size: 54px;
+  font-weight: 400;
+  line-height: .82;
+  float: left;
+  margin-right: 6px;
+  margin-top: 6px;
+  color: var(--forest);
+}
+
+/* ASIDE BOXES */
+.aside-box {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--forest);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.aside-box.sky { border-top-color: var(--sky); }
+.aside-box.earth { border-top-color: var(--earth); }
+.aside-tag {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 10px;
+}
+.aside-box.sky .aside-tag { color: var(--sky); }
+.aside-box.earth .aside-tag { color: var(--earth); }
+.aside-box p {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin: 0;
+}
+.aside-box p strong { color: var(--ink); font-weight: 500; }
+.aside-stat {
+  font-family: 'Crimson Pro', serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--forest);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.aside-stat-label {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-bottom: 10px;
+}
+
+/* ODS */
+.ods-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+.ods-card {
+  background: var(--forest-lt);
+  padding: 14px;
+}
+.ods-n {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 6px;
+}
+.ods-name { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.ods-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+
+/* TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 13px;
+}
+.data-table th {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--ink);
+}
+.data-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.td-name { color: var(--ink); font-weight: 400; }
+.up   { color: #9b3a1a; }
+.down { color: var(--forest); }
+.flat { color: var(--ink-muted); }
+
+/* VIZ */
+.viz { border: 1px solid var(--rule); margin: 24px 0; background: var(--surface); }
+.viz-top {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--forest-lt);
+}
+.viz-title { font-size: 12px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+.viz-sub   { font-size: 11px; color: var(--ink-muted); margin-top: 2px; }
+.viz-badge {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--forest);
+  border: 1px solid var(--forest-mid);
+  padding: 2px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--surface);
+}
+.viz-body { background: #fff; }
+.viz-body iframe { width: 100%; border: none; display: block; height: 520px; }
+.viz-body.tall iframe { height: 700px; }
+.viz-foot {
+  padding: 8px 16px;
+  border-top: 1px solid var(--rule);
+  font-size: 10px;
+  color: var(--ink-muted);
+  background: var(--forest-lt);
+}
+
+/* PULLQUOTE */
+.pullquote {
+  border-left: 3px solid var(--forest-mid);
+  padding: 6px 0 6px 20px;
+  margin: 24px 0;
+}
+.pullquote p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0;
+}
+.pullquote-src {
+  font-size: 10px;
+  color: var(--ink-muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+/* VERDICT */
+.verdict { border: 1px solid var(--rule); margin: 20px 0; background: var(--surface); }
+.verdict-head {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: var(--forest-lt);
+}
+.verdict-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 14px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  font-size: 13px;
+}
+.verdict-row:last-child { border-bottom: none; }
+.v-country { font-weight: 500; color: var(--ink); font-size: 12px; }
+.v-badge {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.v-good  { color: var(--forest); }
+.v-bad   { color: #9b3a1a; }
+.v-mixed { color: #7a5c1a; }
+.v-text { color: var(--ink-soft); line-height: 1.6; }
+
+/* CLOSING */
+.closing {
+  padding: 48px 0 0;
+  border-top: 1px solid var(--rule);
+  margin-top: 48px;
+}
+.closing-q {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 560px;
+  margin-bottom: 14px;
+}
+.closing-q em { font-style: normal; color: var(--forest); }
+
+/* FOOTER */
+footer {
+  border-top: 2px solid var(--forest);
+  background: var(--surface);
+  padding: 32px 48px;
+  margin-top: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+.footer-l { font-size: 12px; color: var(--ink-muted); line-height: 1.8; }
+.footer-l a { color: var(--forest); text-decoration: none; }
+.footer-r {
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* FADE */
+.fade { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.fade.on { opacity: 1; transform: none; }
+
+@media (max-width: 880px) {
+  header { padding: 14px 20px; }
+  .header-nav { display: none; }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px 40px; }
+  .hero-stats { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 24px; flex-direction: row; flex-wrap: wrap; }
+  .stat-row { flex: 1 1 50%; border-bottom: none; padding: 12px 0; }
+  .page { padding: 0 20px; }
+  .section-wrap { grid-template-columns: 1fr; gap: 24px; }
+  .ods-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-brand">InfoVis · ECD 2025.B · Grupo 1</span>
+  <ul class="header-nav">
+    <li><a href="#evolucion">Evolución</a></li>
+    <li><a href="#desacople">Desacople</a></li>
+    <li><a href="#intensidad">Intensidad</a></li>
+    <li><a href="#veredicto">Veredicto</a></li>
+  </ul>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-main">
+      <div class="hero-kicker">Trabajo Práctico Final · Visualización de Datos</div>
+      <h1>¿Estamos<br><em>a tiempo?</em></h1>
+      <p class="hero-lead">22 años de datos del Banco Mundial revelan si los países están cumpliendo la promesa central de la Agenda 2030: crecer económicamente sin destruir el clima.</p>
+      <div class="hero-byline">
+        <div class="byline-label">Autores</div>
+        <div class="byline-authors">
+          Carlos Lazzarino<br>
+          Victoria Reppucci<br>
+          Ailin Natali Gomez Romay<br>
+          Vanessa Vidal
+        </div>
+        <div class="byline-course">Grupo 1 · InfoVis · ECD 2025.B · Maestría en Ciencia de Datos · Mayo 2026</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-row">
+        <div class="stat-n green">22</div>
+        <div class="stat-d">años de datos<br>2000 – 2022</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n">12</div>
+        <div class="stat-d">países<br>7 regiones</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n">276</div>
+        <div class="stat-d">registros<br>en el dataset</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-n muted">3</div>
+        <div class="stat-d">visualizaciones<br>interactivas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- CONTEXTO + DESACOPLE AL COSTADO -->
+  <div class="section-wrap fade">
+    <div class="section-main">
+      <div class="sec-label">
+        <span class="sec-tag">Contexto</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2>La promesa de la <em>Agenda 2030</em></h2>
+      <p class="dropcap">En septiembre de 2015, 193 naciones firmaron los Objetivos de Desarrollo Sostenible. Tres de ellos articulan directamente la relación entre economía y clima: el ODS 7 (energía limpia), el ODS 13 (acción climática) y el ODS 17 (alianzas para financiarlo).</p>
+      <p>El indicador técnico que permite medir el avance real es la <strong>intensidad de carbono</strong>: cuántas toneladas de CO₂ se emiten por cada unidad de PBI generada. Si esa cifra baja mientras la economía crece, el país está logrando el desacople que la Agenda promete.</p>
+      <div class="ods-grid">
+        <div class="ods-card">
+          <div class="ods-n">ODS 7</div>
+          <div class="ods-name">Energía limpia</div>
+          <p class="ods-desc">Acceso universal a energía asequible y sostenible para 2030.</p>
+        </div>
+        <div class="ods-card">
+          <div class="ods-n">ODS 13</div>
+          <div class="ods-name">Acción climática</div>
+          <p class="ods-desc">Medidas urgentes para combatir el cambio climático global.</p>
+        </div>
+        <div class="ods-card">
+          <div class="ods-n">ODS 17</div>
+          <div class="ods-name">Alianzas globales</div>
+          <p class="ods-desc">Financiamiento y cooperación para lograr los objetivos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">Concepto clave</div>
+        <p><strong>Desacople</strong> es cuando un país logra crecer económicamente sin aumentar sus emisiones de CO₂. Es la hipótesis central que la Agenda 2030 asume como posible.</p>
+        <p style="margin-top:10px;">Si un país se desplaza hacia la derecha en el eje del PBI sin subir en el eje del CO₂, logró el desacople.</p>
+      </div>
+      <div class="aside-box sky">
+        <div class="aside-tag">Fuente de datos</div>
+        <p><strong>World Bank Data360</strong><br>data360files.worldbank.org<br>Dataset: WB_WDI</p>
+      </div>
+      <div class="aside-box earth">
+        <div class="aside-tag">Indicadores usados</div>
+        <p>
+          CO₂ per cápita<br>
+          PBI per cápita<br>
+          Intensidad de carbono
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIZ 1 -->
+  <div class="section-wrap fade" id="evolucion">
+    <div class="section-main">
+      <div class="sec-label">
+        <span class="sec-tag">01 · Evolución</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2>22 años de <em>trayectorias divergentes</em></h2>
+      <p>Entre 2000 y 2022, los países se movieron en direcciones opuestas. Europa redujo sostenidamente. Asia creció con fuerza. El Sur global permaneció bajo. Dos crisis marcaron inflexiones globales: la financiera de 2008–2009 y la pandemia de 2020.</p>
+      <table class="data-table">
+        <thead>
+          <tr><th>País</th><th>2000</th><th>2022</th><th>Tendencia</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-name">Alemania</td><td>10.9</td><td>7.9</td><td class="down">↓ mejora</td></tr>
+          <tr><td class="td-name">EE.UU.</td><td>19.6</td><td>14.4</td><td class="down">↓ mejora</td></tr>
+          <tr><td class="td-name">Australia</td><td>17.4</td><td>14.7</td><td class="down">↓ leve</td></tr>
+          <tr><td class="td-name">China</td><td>3.1</td><td>8.9</td><td class="up">↑ sube</td></tr>
+          <tr><td class="td-name">India</td><td>1.0</td><td>2.0</td><td class="up">↑ sube</td></tr>
+          <tr><td class="td-name">A. Saudita</td><td>13.2</td><td>19.3</td><td class="up">↑ sube</td></tr>
+          <tr><td class="td-name">Brasil</td><td>2.0</td><td>2.3</td><td class="flat">→ estable</td></tr>
+          <tr><td class="td-name">Nigeria</td><td>0.7</td><td>0.6</td><td class="down">↓ baja</td></tr>
+        </tbody>
+      </table>
+      <div class="viz">
+        <div class="viz-top">
+          <div>
+            <div class="viz-title">Emisiones de CO₂ per cápita por país (2000–2022)</div>
+            <div class="viz-sub">Click en una línea o en la leyenda · Scroll para zoom · Arrastrá para mover</div>
+          </div>
+          <span class="viz-badge">Altair · Colab</span>
+        </div>
+        <div class="viz-body tall">
+          <iframe src="./viz1_lineas.html" loading="lazy"></iframe>
+        </div>
+        <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_EN_GHG_CO2_PC_CE_AR5 · 12 países · 2000–2022</div>
+      </div>
+      <div class="pullquote">
+        <p>"La pandemia de 2020 produjo la mayor caída de emisiones en décadas. En 2021 y 2022, casi todos los países rebotaron — algunos superando niveles prepandemia."</p>
+        <div class="pullquote-src">Análisis propio · World Bank Data360</div>
+      </div>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">Para leer el gráfico</div>
+        <p>Hacé <strong>click en una línea</strong> para resaltar ese país. Hacé click en la <strong>leyenda</strong> para resaltar una región. Usá el <strong>scroll</strong> para hacer zoom y <strong>arrastrá</strong> para mover.</p>
+      </div>
+      <div class="aside-box sky">
+        <div class="aside-tag">Dos momentos clave</div>
+        <p><strong>2009</strong> — Crisis financiera global. Caída brusca en todos los países desarrollados.<br><br><strong>2020</strong> — Pandemia de COVID-19. Mayor caída de emisiones en décadas. El rebote en 2021–2022 fue casi inmediato.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIZ 2 -->
+  <div class="section-wrap fade" id="desacople">
+    <div class="section-main">
+      <div class="sec-label">
+        <span class="sec-tag">02 · El desacople</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2>¿Crecer sin <em>contaminar más?</em></h2>
+      <p>Si la Agenda 2030 funciona, los países deberían moverse hacia la derecha en el eje del PBI sin subir en el eje del CO₂. El slider permite ver cómo se desplazan año a año. Lo que emerge es una historia compleja: algunos lograron el desacople, otros no.</p>
+      <p>Las economías emergentes siguen atrapadas en una trayectoria donde crecer significa emitir más — no por falta de voluntad, sino de acceso a tecnología limpia y financiamiento climático.</p>
+      <div class="viz">
+        <div class="viz-top">
+          <div>
+            <div class="viz-title">PBI per cápita vs CO₂ per cápita — slider de año 2000–2022</div>
+            <div class="viz-sub">Mové el slider · Tamaño = intensidad de carbono · Click en leyenda para filtrar</div>
+          </div>
+          <span class="viz-badge">Altair · Colab</span>
+        </div>
+        <div class="viz-body">
+          <iframe src="./viz3_scatter.html" loading="lazy"></iframe>
+        </div>
+        <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_NY_GDP_PCAP_CD y WB_WDI_EN_GHG_CO2_PC_CE_AR5</div>
+      </div>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">¿Qué buscar?</div>
+        <p>Un país que se mueve <strong>hacia la derecha sin subir</strong> verticalmente logró el desacople.<br><br><strong>Alemania:</strong> PBI sube, CO₂ baja.<br><strong>China:</strong> ambos suben.<br><strong>India:</strong> ambos suben desde niveles bajos.</p>
+      </div>
+      <div class="aside-box earth">
+        <div class="aside-tag">El tamaño importa</div>
+        <p>El tamaño de cada burbuja representa la <strong>intensidad de carbono</strong>: cuánto CO₂ genera ese país por cada dólar de PBI. Una burbuja grande y alta es el peor escenario posible.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIZ 3 -->
+  <div class="section-wrap fade" id="intensidad">
+    <div class="section-main">
+      <div class="sec-label">
+        <span class="sec-tag">03 · Intensidad de carbono</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2>El indicador que <em>nadie mira</em> pero importa</h2>
+      <p>La intensidad de carbono mide cuántas toneladas de CO₂ se emiten por cada unidad de PBI. Es el indicador más honesto de eficiencia climática. El hallazgo más llamativo: <strong>China redujo su intensidad a la mitad</strong> en 22 años — aunque sus emisiones totales casi se triplicaron, porque su economía creció aún más rápido.</p>
+      <div class="viz">
+        <div class="viz-top">
+          <div>
+            <div class="viz-title">Intensidad de carbono por país y año (2000–2022)</div>
+            <div class="viz-sub">Color más intenso = más CO₂ por unidad de PBI · Barras = promedio histórico · Hover para valores</div>
+          </div>
+          <span class="viz-badge">Altair · Colab</span>
+        </div>
+        <div class="viz-body">
+          <iframe src="./viz4_heatmap.html" loading="lazy"></iframe>
+        </div>
+        <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_EN_GHG_CO2_RT_GDP_KD · 2000–2022</div>
+      </div>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">Rango en el dataset</div>
+        <div class="aside-stat">0.18</div>
+        <div class="aside-stat-label">Brasil — mínimo (matriz hidroeléctrica)</div>
+        <div class="aside-stat" style="color:var(--earth);">1.68</div>
+        <div class="aside-stat-label">Arabia Saudita — máximo</div>
+        <p>La meta de la Agenda 2030 implica converger hacia valores menores a <strong>0.3</strong> para 2030. Hoy solo dos países de la muestra están por debajo de ese umbral.</p>
+      </div>
+      <div class="aside-box sky">
+        <div class="aside-tag">El caso Brasil</div>
+        <p>Brasil tiene la intensidad más baja no por política industrial, sino por <strong>geografía energética</strong>: su matriz es mayoritariamente hidroeléctrica. No es un modelo fácilmente replicable.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEREDICTO -->
+  <div class="section-wrap fade" id="veredicto">
+    <div class="section-main">
+      <div class="sec-label">
+        <span class="sec-tag">04 · Veredicto</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2>¿Estamos <em>a tiempo?</em></h2>
+      <p>Con 2030 a menos de cinco años, los datos muestran un panorama desigual. El desacople existe pero ocurre principalmente donde menos se necesita. Los países que más necesitan crecer son los que menos herramientas tienen para hacerlo limpiamente.</p>
+      <div class="verdict">
+        <div class="verdict-head">Lo que dicen los datos — país a país</div>
+        <div class="verdict-row">
+          <div><div class="v-country">Alemania · EE.UU.</div><div class="v-badge v-good">Desacople logrado</div></div>
+          <p class="v-text">Redujeron emisiones per cápita mientras crecían. Son los casos más claros de desacople real en la muestra.</p>
+        </div>
+        <div class="verdict-row">
+          <div><div class="v-country">China · India</div><div class="v-badge v-mixed">Desacople parcial</div></div>
+          <p class="v-text">Mejoraron su intensidad de carbono, pero las emisiones totales siguen creciendo por el volumen de su expansión económica.</p>
+        </div>
+        <div class="verdict-row">
+          <div><div class="v-country">A. Saudita · Australia</div><div class="v-badge v-bad">Sin mejora</div></div>
+          <p class="v-text">Mantienen los niveles más altos con poca variación. Sus economías siguen dependientes de combustibles fósiles.</p>
+        </div>
+        <div class="verdict-row">
+          <div><div class="v-country">Brasil</div><div class="v-badge v-good">Baja intensidad</div></div>
+          <p class="v-text">Caso atípico: baja intensidad por su matriz hidroeléctrica, no por política industrial. No es fácilmente replicable.</p>
+        </div>
+        <div class="verdict-row">
+          <div><div class="v-country">Nigeria · Indonesia</div><div class="v-badge v-mixed">Emisiones bajas</div></div>
+          <p class="v-text">Valores bajos por bajo nivel de industrialización. El riesgo crece a medida que sus economías se expandan.</p>
+        </div>
+      </div>
+      <div class="closing">
+        <p class="closing-q">"El camino hacia los ODS existe. Pero es profundamente desigual. Sin financiamiento climático real hacia el Sur Global, la promesa de 2015 quedará donde <em>menos falta hacía</em>."</p>
+        <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Análisis elaborado con datos del World Bank Data360 · 276 registros · 12 países · 2000–2022</p>
+      </div>
+    </div>
+    <div class="section-aside">
+      <div class="aside-box">
+        <div class="aside-tag">La gran contradicción</div>
+        <p>Los países que más necesitan crecer son los que menos herramientas tienen para hacerlo de forma limpia. Sin <strong>transferencia tecnológica</strong> y financiamiento climático, la Agenda 2030 corre el riesgo de cumplirse solo donde menos hacía falta.</p>
+      </div>
+      <div class="aside-box earth">
+        <div class="aside-tag">Países analizados</div>
+        <p>Argentina · Australia · Brasil · China · Alemania · India · Indonesia · México · Nigeria · Arabia Saudita · Sudáfrica · Estados Unidos</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-l">
+    <div><strong style="color:var(--ink);">Trabajo Práctico Final — Visualización de Datos</strong></div>
+    <div>Carlos Lazzarino · Victoria Reppucci · Ailin Natali Gomez Romay · Vanessa Vidal</div>
+    <div>Grupo 1 · InfoVis · ECD 2025.B · Maestría en Ciencia de Datos</div>
+    <div style="margin-top:6px;">Fuente: <a href="https://data360.worldbank.org/en/api">World Bank Data360</a> · Herramientas: Python · pandas · duckdb · Altair · GitHub Pages</div>
+  </div>
+  <div class="footer-r">¿Estamos<br><em>a tiempo?</em></div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
