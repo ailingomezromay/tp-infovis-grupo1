@@ -335,7 +335,7 @@ p strong { font-weight: 500; color: var(--ink); }
 /* VIZ */
 .viz-wrap {
   grid-column: 1 / -1;
-  margin: 8px 0 32px;
+  margin: 8px 0 16px;
 }
 .viz { border: 1px solid var(--rule); background: var(--surface); }
 .viz-top {
@@ -362,8 +362,9 @@ p strong { font-weight: 500; color: var(--ink); }
   background: var(--surface);
 }
 .viz-body { background: #fff; }
-.viz-body iframe { width: 100%; border: none; display: block; height: 560px; }
-.viz-body.tall iframe { height: 740px; }
+/* Heights = chart height + top/bottom padding (20+20) + title area (~60px) */
+.viz-body iframe { width: 100%; border: none; display: block; height: 600px; }
+.viz-body.tall iframe { height: 600px; }
 .viz-foot {
   padding: 8px 20px;
   border-top: 1px solid var(--rule);
@@ -468,6 +469,13 @@ footer {
   text-align: right;
   white-space: nowrap;
 }
+
+/* VIZ 2 — scatter: height 450 + padding 40 + title ~60 = 550 */
+#desacople .viz-body iframe { height: 550px; }
+
+/* VIZ 3 — heatmap: height 320 + padding 40 + title ~60 = 420 */
+#intensidad .viz-wrap { margin-bottom: 4px; }
+#intensidad .viz-body iframe { height: 420px; }
 
 /* FADE */
 .fade { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
@@ -632,7 +640,7 @@ footer {
           <span class="viz-badge">Altair · Colab</span>
         </div>
         <div class="viz-body tall">
-          <iframe src="./viz1_lineas.html" loading="lazy"></iframe>
+          <iframe src="./viz1_lineas.html" loading="lazy" scrolling="no"></iframe>
         </div>
         <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_EN_GHG_CO2_PC_CE_AR5 · 12 países · 2000–2022</div>
       </div>
@@ -674,7 +682,7 @@ footer {
           <span class="viz-badge">Altair · Colab</span>
         </div>
         <div class="viz-body">
-          <iframe src="./viz3_scatter.html" loading="lazy"></iframe>
+          <iframe src="./viz2_scatter.html" loading="lazy" scrolling="no"></iframe>
         </div>
         <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_NY_GDP_PCAP_CD y WB_WDI_EN_GHG_CO2_PC_CE_AR5</div>
       </div>
@@ -715,7 +723,7 @@ footer {
           <span class="viz-badge">Altair · Colab</span>
         </div>
         <div class="viz-body">
-          <iframe src="./viz4_heatmap.html" loading="lazy"></iframe>
+          <iframe src="./viz3_heatmap.html" loading="lazy" scrolling="no"></iframe>
         </div>
         <div class="viz-foot">Fuente: World Bank Data360 · WB_WDI_EN_GHG_CO2_RT_GDP_KD · 2000–2022</div>
       </div>
